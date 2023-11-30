@@ -1,9 +1,21 @@
- postgres:
-    image: postgres
+#  postgres:
+#     image: postgres
+#     container_name: pg_trading
+#     ports:
+#       - "5432:5432"
+#     environment:
+#       - POSTGRES_USER=admin
+#       - POSTGRES_PASSWORD=admin
+#       - POSTGRES_DB=pg_trading
+
+version: '3'
+
+services:
+
+  postgres:
+    image: postgres:latest
     container_name: pg_trading
     ports:
-      - "5435:5432"
-    environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=pg_trading
+      - "5432:5432"
+    env_file:
+      - .env
