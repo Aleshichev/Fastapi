@@ -1,13 +1,13 @@
 .PHONY: init init-migration down build run db-migrate test tox
 
 run: build upgrade
-	uvicorn main:app --reload
+	uvicorn src.main:app --reload
 
 down:
 	docker compose down
 
 start:
-	uvicorn main:app --reload
+	uvicorn src.main:app --reload
 
 build:
 	docker compose up -d
