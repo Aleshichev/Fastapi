@@ -10,3 +10,6 @@ DB_USER = os.environ.get("DB_USER")
 DB_PASS = os.environ.get("DB_PASS")
 
 SECRET_AUTH = os.environ.get("SECRET_AUTH")
+
+REDIS_HOST = "redis"
+REDIS_PORT = '6379'

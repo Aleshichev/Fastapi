@@ -10,6 +10,8 @@ start:
 	uvicorn src.main:app --reload
 
 build:
+	docker compose down
+	sleep 2
 	docker compose up -d
 	sleep 2
 

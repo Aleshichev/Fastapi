@@ -13,15 +13,15 @@ from src.operations.schemas import OperationCreate
 router = APIRouter(prefix="/operations", tags=["Operation"])
 
 
-# @router.get("/long_operation")
-# @cache(expire=30)
-# def get_long_op():
-#     time.sleep(2)
-#     print('yes')
-#     return "Много много данных, которые вычислялись сто лет"
+@router.get("/long_operation")
+@cache(expire=30)
+def get_long_op():
+    time.sleep(2)
+    print("yes")
+    return "Много много данных, которые вычислялись сто лет"
 
 
-
+@cache(expire=30)
 @router.get("/")
 async def get_specific_operations(
     operation_type: str, session: AsyncSession = Depends(get_async_session)
@@ -37,6 +37,7 @@ async def get_specific_operations(
         )
 
 
+@cache(expire=30)
 @router.post("/")
 async def add_specific_operations(
     new_operation: OperationCreate, session: AsyncSession = Depends(get_async_session)

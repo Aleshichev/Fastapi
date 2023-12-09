@@ -21,4 +21,12 @@ services:
       - .env
 
   redis:
-    image: redis
+    container_name: fastapi-redis
+    image: redis:7.2.3
+    restart: on-failure
+    env_file:
+      - .env
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+    expose:
+      - ${REDIS_PORT}

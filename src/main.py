@@ -1,16 +1,15 @@
 from fastapi import FastAPI
-from fastapi_cache import FastAPICache
-from fastapi_cache.backends.redis import RedisBackend
 
 from contextlib import asynccontextmanager
-from redis import asyncio as aioredis
 from src.auth.base_config import auth_backend, fastapi_users
 from src.auth.schemas import UserRead, UserCreate
 
+from .redis import lifespan
 from src.operations.router import router as router_operation
 
 app = FastAPI(
     title="Trading App",
+    lifespan=lifespan,
 )
 
 app.include_router(
@@ -26,18 +25,3 @@ app.include_router(
 )
 
 app.include_router(router_operation)
-
-# @app.on_event("startup")
-# async def startup_event():
-#     redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
-#     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
-
-# @asynccontextmanager
-# async def lifespan(app: FastAPI):
-#     redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
-#     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
-#     yield
-
-    
-    
-# app = FastAPI(lifespan=lifespan)
